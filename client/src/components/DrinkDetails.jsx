@@ -10,6 +10,8 @@ function DrinkDetails() {
 
   useEffect(() => {
     const fetchDrink = async () => {
+      console.log("VITE_API_URL:", import.meta.env.VITE_API_URL); // Log the VITE_API_URL
+      
       try {
         const response = await api.get(`/api/drinks/${id}`);
         setDrink(response.data);
