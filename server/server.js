@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -11,15 +10,32 @@ dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
+// Define allowed origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://mongoqr-frontend.onrender.com",
+];
+
+// Use CORS middleware with dynamic origin handling
 app.use(
   cors({
-    origin: "https://mongoqr-frontend.onrender.com", // Set to your frontend URL
+    origin: function (origin, callback) {
+      // Allow requests with no origin (e.g., mobile apps, curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.use(express.json()); // For parsing JSON bodies
 
-app.use("/api/qr", qrRoutes); // Mount routes
+// Mount routes
+app.use("/api/qr", qrRoutes);
 app.use("/api/drinks", drinkRoutes);
 app.get("/api/drinks/:id", getDrinkById);
 
