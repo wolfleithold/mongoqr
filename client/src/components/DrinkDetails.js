@@ -1,7 +1,7 @@
 // client/src/components/DrinkDetails.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../api"; // Import the custom Axios instance
 
 function DrinkDetails() {
   const { id } = useParams(); // Get the drink ID from URL
@@ -10,7 +10,7 @@ function DrinkDetails() {
   useEffect(() => {
     const fetchDrink = async () => {
       try {
-        const response = await axios.get(`/api/drinks/${id}`);
+        const response = await api.get(`/api/drinks/${id}`); // Use the custom instance
         setDrink(response.data);
       } catch (error) {
         console.error("Error fetching drink data:", error);
