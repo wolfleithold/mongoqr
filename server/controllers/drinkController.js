@@ -17,6 +17,17 @@ exports.createDrink = async (req, res) => {
   }
 };
 
+exports.getDrinkById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const drink = await Drink.findById(id); // Fetch drink by ID from database
+    if (!drink) return res.status(404).json({ message: "Drink not found" });
+    res.json(drink);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
 // Get all drinks
 exports.getDrinks = async (req, res) => {
   try {
