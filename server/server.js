@@ -18,7 +18,6 @@ app.use(express.json()); // For parsing JSON bodies
 // Mount routes
 app.use("/api/qr", qrRoutes);
 app.use("/api/drinks", drinkRoutes);
-app.get("/api/drinks/:id", getDrinkById);
 
 // MongoDB Connection
 mongoose
