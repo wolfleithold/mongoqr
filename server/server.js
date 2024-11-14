@@ -10,27 +10,8 @@ dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
-// Define allowed origins
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://mongoqr-frontend.onrender.com",
-];
-
 // Use CORS middleware with dynamic origin handling
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (e.g., mobile apps, curl requests)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 app.use(express.json()); // For parsing JSON bodies
 
