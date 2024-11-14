@@ -3,11 +3,13 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import DrinkDetails from "./components/DrinkDetails";
+import AllDrinks from "./components/AllDrinks";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/drinks" element={<AllDrinks />} />
       <Route path="/drinks/:id" element={<DrinkDetails />} />
     </Routes>
   );
