@@ -9,15 +9,13 @@ dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 app.use(express.json()); // For parsing JSON bodies
+
 app.use("/api/qr", qrRoutes); // Mount routes
 app.use("/api/drinks", drinkRoutes);
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI, {})
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
