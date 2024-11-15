@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const drinkRoutes = require("./routes/drinkRoutes");
 const cors = require("cors");
+const qrRoutes = require("./routes/qrRoutes");
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -15,6 +16,7 @@ app.use(express.json()); // For parsing JSON bodies
 
 // Mount routes
 app.use("/api/drinks", drinkRoutes);
+app.use("/api/qr", qrRoutes);
 
 // MongoDB Connection
 mongoose
