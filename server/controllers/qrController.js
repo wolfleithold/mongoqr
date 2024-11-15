@@ -5,7 +5,7 @@ const QRCode = require("qrcode");
 // Function to create and store a new QR code for a specific drink
 exports.createQRCode = async (req, res) => {
   const { drinkId } = req.params;
-  const qrUrl = `https://mongoqr-frontend.onrender.com/drinks/${drinkId}`; // URL to encode
+  const qrUrl = `${process.env.FRONTEND_URL}/drinks/${drinkId}`; // URL to encode
 
   try {
     // Generate the QR code in Base64 format
