@@ -7,6 +7,7 @@ const {
   deleteDrink,
   patchDrink,
   getDrinkById,
+  getAllDrinksWithViews,
 } = require("../controllers/drinkController"); // Correctly import the functions
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get("/:id", getDrinkById); // GET /api/drinks/:id - Get a drink by ID
 router.put("/:id", updateDrink); // PUT /api/drinks/:id - Update a drink
 router.delete("/:id", deleteDrink); // DELETE /api/drinks/:id - Delete a drink
 router.patch("/:id", patchDrink); // PATCH /api/drinks/:id - Patch a drink
+router.get("/views", getAllDrinksWithViews); // GET /api/drinks/views - Get all drinks with views
 
 module.exports = router;

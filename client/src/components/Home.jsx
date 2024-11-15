@@ -1,6 +1,7 @@
 // client/src/components/Home.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import DrinkViewsChart from "./DrinkViewsChart";
 
 function Home() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Home() {
   return (
     <div>
       <h1>Welcome to Booze Buddy</h1>
+      <DrinkViewsChart />
       <button onClick={goToDrinks}>Go to Drinks</button>
 
       {/* Test buttons for specific drink IDs */}

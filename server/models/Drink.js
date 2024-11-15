@@ -7,6 +7,7 @@ const DrinkSchema = new mongoose.Schema({
   imageUrl: { type: String, required: true },
   additionalInfo: { type: String },
   createdAt: { type: Date, default: Date.now },
+  views: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model("Drink", DrinkSchema);

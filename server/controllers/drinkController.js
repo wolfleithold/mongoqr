@@ -20,9 +20,17 @@ exports.createDrink = async (req, res) => {
 exports.getDrinkById = async (req, res) => {
   try {
     const { id } = req.params;
-    const drink = await Drink.findById(id); // Fetch drink by ID from database
+
+    // Increment views for the drink
+    const drink = await Drink.findByIdAndUpdate(
+      id,
+      { $inc: { views: 1 } },
+      { new: true } // Return the updated document
+    );
+
     if (!drink) return res.status(404).json({ message: "Drink not found" });
-    res.json(drink);
+
+    res.status(200).json(drink);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -72,5 +80,17 @@ exports.patchDrink = async (req, res) => {
     res.status(200).json(patchedDrink);
   } catch (error) {
     res.status(500).json({ error: "Failed to patch drink" });
+  }
+};
+
+// server/controllers/drinkController.js
+exports.getAllDrinksWithViews = async (req, res) => {
+  try {
+    const drinks = await Drink.find({}, "name views"); // Retrieve name and views only
+    res.status(200).json(drinks);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch drinks with views", error });
   }
 };
